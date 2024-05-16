@@ -16,28 +16,6 @@ engine = create_engine(
     echo=True,
 )
 
-#####################################################
-#refacter with pytest fixture
-
-@pytest.fixture(scope="module",autouse = True)
-def get_db_session():
-    SQLModel.metadata.create_all(engine)
-    yield Session(engine)
-
-@pytest.fixture()
-def test_app(get_db_session):
-    def test_session():
-        yield get_db_session
-    app.dependency_overrides[get_session] =[test_session]
-    with TestClient(app=app) as client:
-        yield client
-
-
-
-
-
-
-#######################################################
 
 # Root Test
 def test_root():
@@ -131,6 +109,7 @@ def test_edit_todo():
 def test_delete_todo():
     SQLModel.metadata.create_all(engine)
     with Session(engine) as session:
+
         def db_session_override():
             return session
 
