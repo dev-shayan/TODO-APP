@@ -7,3 +7,4 @@ except FileNotFoundError:
     Config = Config()
 
 DATABASE_URL = Config("DATABASE_URL", cast=Secret)
+TEST_DATABASE_URL = Config("TEST_DATABASE_URL", cast=Secret)
