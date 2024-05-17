@@ -1,7 +1,7 @@
 import React from "react";
 import Single_todo from "./single_todo";
 import { Todo } from "../../../todo";
-import { Todocomponent } from "./todocomponent";
+import  Todocomponent  from "./todocomponent";
 
 export default function Table() {
   return (

@@ -24,35 +24,34 @@ import { FiEdit } from "react-icons/fi";
 import Dialog from "@/components/component/dialog";
 import { Delete_dialog } from "./delete_dialog";
 
-export function Todocomponent() {
-  const task: Todo[] = [
-    { id: 1, content: "Drink five liters of water", is_completed: false },
-    { id: 2, content: "Task 2", is_completed: false },
-    { id: 3, content: "Task 3", is_completed: false },
-  ];
+export default async function Todocomponent() {
+  const response = await fetch("http://localhost:8000/todos");
+  const task: Todo[] = await response.json();
+  console.log(task);
+  
   const TaskRow = ({ id, task }: any) => (
-    <TableRow>
+    <TableRow className="flex justify-between">
       <TableCell>
         <div className="flex items-center gap-2">
           <span>{id}</span>
           <span>{task}</span>
         </div>
       </TableCell>
-      <TableCell className="text-right items-center flex gap-1  ">
+      <TableCell className="text-right items-center flex gap-1 mr-3  ">
         <Checkbox
           className={` ${
             task.is_completed ? "bg-black" : "bg-white"
           } mt-[1px] mr-[2px]  border-2`}
         />
-<Delete_dialog >
-        <TrashIcon className="w-5" />
-</Delete_dialog> 
+        <Delete_dialog>
+          <TrashIcon className="w-5" />
+        </Delete_dialog>
         <Dialog
           title="Edit Task"
           task_content="Edit your previous task here."
           task_placeholder="Edit your Task here"
         >
-          <FiEdit size={18} className="mr-5"/>
+          <FiEdit size={18} />
         </Dialog>
       </TableCell>
     </TableRow>
