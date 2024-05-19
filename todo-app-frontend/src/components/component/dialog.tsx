@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/dialog";
 import AddTask from "./AddTask";
 import EditTask from "./EditTask";
+import { Todo } from "../../../todo";
 
 export default function dialog({
   children,
@@ -34,6 +35,7 @@ export default function dialog({
   task_content,
   adding,
   editing,
+  task
 }: {
   children: React.ReactNode;
   title: string;
@@ -41,6 +43,7 @@ export default function dialog({
   task_placeholder: string;
   adding?: boolean;
   editing?: boolean;
+  task:Todo;
 }) {
   return (
     <Dialog>
@@ -53,7 +56,7 @@ export default function dialog({
           </DialogDescription>
         </DialogHeader>
         { adding && <AddTask />}
-        { editing && <EditTask />}
+        { editing && <EditTask task={task} />}
       </DialogContent>
     </Dialog>
   );

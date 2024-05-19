@@ -22,7 +22,7 @@ export default async function Todocomponent() {
     }
     const data = await response.json();
     if (Array.isArray(data)) {
-      todo_list = data;
+      todo_list = data.sort((a: Todo, b: Todo) => a.id - b.id);
     } else {
       console.error("Expected an array but received:", data);
     }

@@ -24,6 +24,7 @@ export default function single_todo({ task }: { task: Todo }) {
           task_content="Edit your previous task here."
           task_placeholder="Edit your Task here"
           editing={true}
+          task={task}
         >
           <FiEdit size={18} />
         </Dialog>

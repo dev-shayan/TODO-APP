@@ -1,12 +1,31 @@
+"use client"
 import React from "react";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { useFormState } from "react-dom";
+import { add_todo } from "@/actions/actions";
+import { useEffect,useRef } from "react";
+import toast from "react-hot-toast";
+import Submitbutton from "./Submitbutton";
+
 
 export default function AddTask() {
+
+  const [ state, formAction] = useFormState(add_todo, { status: " ", message: "" });
+  const {status, message} = state;
+  useEffect(() => {
+    if (status === "success") {
+      ref.current?.reset();
+      toast.success(message);
+    } else if (status === "error"){
+      toast.error(message);
+    }
+  }, [state]);
+  const ref = useRef<HTMLFormElement>(null);
+  
   return (
     <div>
       <div className="grid gap-4 py-4">
-        <div className="grid gap-1">
+        <form action={formAction} ref={ref} className="grid gap-1">
           <Input
             type="text"
             placeholder="Add Task here"
@@ -15,10 +34,8 @@ export default function AddTask() {
             required
             name="add-task"
           />
-          <Button type="submit" className="w-full mt-3">
-            Save Task
-          </Button>
-        </div>
+          <Submitbutton />
+        </form>
       </div>
     </div>
   );
