@@ -121,3 +121,9 @@ async def delete_todo(id: int, session: Annotated[Session, Depends(get_session)]
         return {"message": "Task successfully deleted"}
     else:
         raise HTTPException(status_code=404, detail="No task found")
+
+@app.delete('/todos/')
+async def delete_all_todos(session: Annotated[Session, Depends(get_session)]):
+    session.query(Todo).delete(synchronize_session=False)
+    session.commit()
+    return {"message": "All tasks successfully deleted"}

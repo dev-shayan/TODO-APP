@@ -17,29 +17,30 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-import { Button } from "@/components/ui/button";
 import {
   DialogTrigger,
   DialogTitle,
   DialogDescription,
   DialogHeader,
-  DialogFooter,
   DialogContent,
   Dialog,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import AddTask from "./AddTask";
+import EditTask from "./EditTask";
 
 export default function dialog({
   children,
   title,
   task_content,
-  task_placeholder,
+  adding,
+  editing,
 }: {
   children: React.ReactNode;
   title: string;
   task_content: string;
   task_placeholder: string;
+  adding?: boolean;
+  editing?: boolean;
 }) {
   return (
     <Dialog>
@@ -51,17 +52,8 @@ export default function dialog({
             {task_content}
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-1">
-            <Input id="todo-text" placeholder={task_placeholder} />
-          </div>
-        </div>
-
-        <DialogFooter>
-          <Button type="submit" className="w-full">
-            Save Task
-          </Button>
-        </DialogFooter>
+        { adding && <AddTask />}
+        { editing && <EditTask />}
       </DialogContent>
     </Dialog>
   );
