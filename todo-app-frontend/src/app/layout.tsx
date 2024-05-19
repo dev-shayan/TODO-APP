@@ -23,7 +23,7 @@ export default function RootLayout({
           toastOptions={{
             // Define default options
             className: "",
-            duration: 3000,
+            duration: 1000,
             style: {
               background: "black",
               color: "white",
