@@ -34,8 +34,8 @@ export default async function Todocomponent() {
     <Table className="table-auto w-full border-gray-200 h-full">
       <TableHeader>
         <TableRow className="flex justify-between items-center gap-20 mb-3">
-          <TableHead className="text-left text-black">Task</TableHead>
-          <TableHead className="text-right text-black">Actions</TableHead>
+          <TableHead className="text-left text-black dark:text-white">Task</TableHead>
+          <TableHead className="text-right text-black dark:text-white">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

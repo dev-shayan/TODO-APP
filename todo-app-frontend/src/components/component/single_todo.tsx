@@ -22,31 +22,24 @@ export default function single_todo({ task }: { task: Todo }) {
       toast.error(response.message);
     }
   };
-  const handleDelete = async () => {
-    const response = await delete_todo(task.id);
-    if (response.status === "success") {
-      toast.success(response.message);
-    } else if (response.status === "error") {
-      toast.error(response.message);
-    }
-  };
+
   return (
     <TableRow className="flex justify-between items-center ">
       <TableCell>{task.content}</TableCell>
-      <TableCell className="flex items-center gap-1 mr-4">
+      <TableCell className="flex items-center gap-1 mr-4 cursor-pointer">
         {/* <button onClick={handleStatus} > */}
         <Checkbox
           onClick={handleStatus}
           className={` ${
             task.is_completed ? "bg-black" : "bg-white"
-          }  border-2 mt-[2.3px]  `}
+          }  border-2 mt-[2.3px] cursor-pointer  `}
         />
         {/* </button> */}
-        
-        <Delete_dialog task={task} >
-          <TrashIcon className="w-5"/>
+
+        <Delete_dialog task={task}>
+          <TrashIcon className="w-5" />
         </Delete_dialog>
-        
+
         <Dialog
           title="Edit Task"
           task_content="Edit your previous task here."
@@ -54,7 +47,7 @@ export default function single_todo({ task }: { task: Todo }) {
           editing={true}
           task={task}
         >
-          <FiEdit size={18} />
+          <FiEdit size={18}  />
         </Dialog>
       </TableCell>
     </TableRow>

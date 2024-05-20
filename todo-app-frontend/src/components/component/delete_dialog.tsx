@@ -27,7 +27,7 @@ export function Delete_dialog({children, task}: {children: React.ReactNode, task
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete}>Confirm</AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete} className="dark:text-black">Confirm</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
