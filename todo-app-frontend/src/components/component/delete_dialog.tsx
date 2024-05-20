@@ -1,9 +1,20 @@
 import { AlertDialogTrigger, AlertDialogTitle, AlertDialogDescription, AlertDialogHeader, AlertDialogCancel, AlertDialogAction, AlertDialogFooter, AlertDialogContent, AlertDialog } from "@/components/ui/alert-dialog"
+import { delete_todo } from "@/actions/actions";
+import toast from "react-hot-toast";
+import { Todo } from "../../../todo";
 
-export function Delete_dialog({children}: {children: React.ReactNode}) {
+export function Delete_dialog({children, task}: {children: React.ReactNode, task: Todo }) {
+  const handleDelete = async () => {
+    const response = await delete_todo(task.id);
+    if (response.status === "success") {
+      toast.success(response.message);
+    } else if (response.status === "error") {
+      toast.error(response.message);
+    }
+  };
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
+      <AlertDialogTrigger asChild >
         {children}
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -16,7 +27,7 @@ export function Delete_dialog({children}: {children: React.ReactNode}) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Confirm</AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete}>Confirm</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

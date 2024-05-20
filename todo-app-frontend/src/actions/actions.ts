@@ -52,18 +52,38 @@ export async function edit_todo(
     return { status: "error", message: "Failed to edit todo" };
   }
 }
-export async function status_change(id: number, content: string, is_completed: boolean){
+export async function status_change(
+  id: number,
+  content: string,
+  is_completed: boolean
+) {
   try {
     const response = await fetch(`http://localhost:8000/todos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ content :content,is_completed: !is_completed }),
+      body: JSON.stringify({ content: content, is_completed: !is_completed }),
     });
     revalidatePath("/todos");
     return { status: "success", message: "Status Changed successfully" };
   } catch (error) {
     return { status: "error", message: "Failed to change todo status" };
+  }
+}
+//Delete todo
+
+export async function delete_todo(id: number) {
+  try {
+    const response = await fetch(`http://localhost:8000/todos/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    revalidatePath("/todos/");
+    return { status: "success", message: "Todo deleted successfully" };
+  } catch (error) {
+    return { status: "error", message: "Failed to delete todo" };
   }
 }
